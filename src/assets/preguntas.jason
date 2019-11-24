@@ -1,0 +1,156 @@
+questions: [
+    {
+        "q":{
+          "text":"¿Eres hombre o mujer?"
+        },
+        "responses": [
+          { "r": "Soy Hombre" },
+          { "r": "Soy Mujer" }
+        ]
+    },
+    {
+        "q":{
+          "mujer":"¿Cuantos años tienes?",
+          "hombre":"¿Qué edad tienes?"
+        },
+        "responses":[
+          {"r":"15 - 20 años"},
+          {"r":"21 - 25 años"},
+          {"r":"26 - 30 años"},
+          {"r":"31 - 35 años"},
+          {"r":"36 - 40 años"},
+          {"r":"41 - 45 años"},
+        ]
+    },
+    {
+        "q":{
+          "mujer":"¿Estas casada?",
+          "hombre":"¿Estas casado?"
+        },
+        "responses":[
+          {"r":"Sí"},
+          {"r":"No"},
+        ]
+      },
+      {
+        "q":{
+          "mujer":"¿Vives en Apodaca?",
+          "hombre":"¿Vives en Apodaca?"
+        },
+        "responses":[
+          {"r":"Sí"},
+          {"r":"No"},
+        ]
+      },
+      {
+        "q":{
+          "mujer": "¿Le ha dicho su proveedor que usted va a tener gemelos o más de un bebé? ",
+          "hombre":"¿Sabes que significa HTTP?"
+        },
+        "responses": [
+          { "r": "si", "value":1 },
+          { "r": "No", "value": 2 },
+          { "r": "A veces", "value":0 },
+        ]
+      },
+      {
+        "q":{
+          "mujer":"¿Es esta la primera vez que ha estado embarazada?",
+          "hombre":"¿sabes que es el estado de una variable?"
+        },
+        "responses": [
+          { "r": "si", "value":1 },
+          { "r": "No", "value": 2 },
+          { "r": "A veces", "value":0 },
+        ]
+      },
+      {
+        "q":{
+          "mujer":"¿ha tenido que acudir a la sala de emergencias debido a un problema relacionado con el embarazo?",
+          "hombre":"¿sabes por qué coches con el mismo cilindraje tienen diferentes consumos?"
+        },
+        "responses": [
+          { "r": "si", "value":1 },
+          { "r": "No", "value": 2 },
+          { "r": "A veces", "value":0 },
+        ]
+      },
+      {
+        "q":{
+          "mujer":"¿ha sido hospitalizada debido a un problema relacionado con el embarazo?",
+          "hombre":"¿La altura también afecta a los motores con turbo?"
+        },
+        "responses": [
+          { "r": "si", "value":1 },
+          { "r": "No", "value": 2 },
+          { "r": "A veces", "value":0 },
+        ]
+      },
+      {
+        "q":{
+          "mujer":"¿Alguna vez le han dicho que tiene algún tipo de diabetes?",
+          "hombre":"¿Los "autos modernos" necesitan calentar antes de ponerlos en marcha?"
+        },
+        "responses": [
+          { "r": "si", "value":1 },
+          { "r": "No", "value": 2 },
+          { "r": "A veces", "value":0 },
+        ]
+      },
+      {
+        "q":{
+          "mujer":" ¿a menudo le ha preocupado sentirse triste, deprimida o sin esperanza?",
+          "hombre":"¿Un motor nuevo o reparado necesita ser "asentado" antes de usarlo?"
+        },
+        "responses": [
+          { "r": "si", "value":1 },
+          { "r": "No", "value": 2 },
+          { "r": "A veces", "value":0 },
+        ]
+      },
+      {
+        "q":{
+          "mujer":"¿ha tenido alguna enfermedad de transmisión sexual?",
+          "hombre":"¿sabes cuál es la duración media de un coche?"
+        },
+        "responses": [
+          { "r": "si", "value":1 },
+          { "r": "No", "value": 2 },
+          { "r": "A veces", "value":0 },
+        ]
+      },
+      {
+        "q":{
+          "mujer":"¿Se pinta las uñas de los pies?",
+          "hombre":"¿Está pensando en pintar su auto?"
+        },
+        "responses": [
+          { "r": "si", "value":1 },
+          { "r": "No", "value": 2 },
+          { "r": "A veces", "value":0 },
+        ]
+      },
+      {
+        "q":{
+          "mujer":"¿Sabe cuando exactamente sera el parto?",
+          "hombre":"¿Es usted una persona puntual o siempre llega tarde?"
+        },
+        "responses": [
+          { "r": "si", "value":1 },
+          { "r": "No", "value": 2 },
+          { "r": "A veces", "value":0 },
+        ]
+      },
+      {
+        "q":{
+          "mujer":"¿Ya tiene escogido al pediatra que atenderá a su bebé? ",
+          "hombre":"¿Tienes alguna adicción?"
+        },
+        "responses": [
+          { "r": "si", "value":1 },
+          { "r": "No", "value": 2 },
+          { "r": "A veces", "value":0 },
+        ]
+      }
+    ]
+  }
