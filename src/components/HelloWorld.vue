@@ -16,26 +16,16 @@
             <header>
               <h1 class="title is-6">Encuesta</h1>
               <div class="progressContainer">
-                <!-- <b-progress class="w-60 mb-2"
-                            :value="(questionIndex/quiz.questions.length)*100"
-                            :label-html="`<p>${((questionIndex/quiz.questions.length)*100).toFixed(2)} % progreso</p>`"
-                            show-progress></b-progress> -->
                 <b-progress :max="100">
                    <b-progress-bar :value="(questionIndex/quiz.questions.length)*100"
                                    :class="[(genero=='mujer')?'pink':'is-info']">
                     <p>{{((questionIndex/quiz.questions.length)*100).toFixed(2)}}% progreso</p>
                   </b-progress-bar>
                 </b-progress>
-                <!-- <progress
-                  :class="['progress','is-small',(genero=='mujer')?'pink':'is-info']"
-                  :value="(questionIndex/quiz.questions.length)*100"
-                  max="100"
-                >{{(questionIndex/quiz.questions.length)*100}}%</progress>
-                <p>{{((questionIndex/quiz.questions.length)*100).toFixed(2)}}% progreso</p> -->
               </div>
             </header>
 
-            <h2 class="titleContainer title">{{ (false !== !!genero)?quiz.questions[questionIndex].q[genero]:quiz.questions[questionIndex].q.text }}</h2>
+            <h2 class="titleContainer title">{{ (false !== !!genero)?quiz.questions[questionIndex].q[genero]:quiz.questions[questionIndex].q.hombre }}</h2>
             <div class="optionContainer">
               <div
                 class="option"
@@ -80,6 +70,8 @@
 
 <script>
 import Vue from 'vue'
+import firebase from '../Firebase'
+
 var quiz = {
     user: "Norberto",
     questions: [
@@ -252,7 +244,8 @@ export default {
       genero:null,
       isActive: false,
       show: false,
-      finalLandingPage:null
+      finalLandingPage:null,
+      ref: firebase.firestore().collection('questions').orderBy("date", "desc")
     };
   },
   filters: {
@@ -308,7 +301,12 @@ export default {
     }
   },
   created: function(){
-    
+    this.ref.onSnapshot((querySnapshot)=>{
+      this.quiz.questions = [];
+      querySnapshot.forEach((doc)=>{
+        this.quiz.questions.push(doc.data())
+      });
+    });
   }
 }
 </script>
