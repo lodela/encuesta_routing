@@ -243,9 +243,11 @@ export default {
       userResponses: userResponseSkelaton,
       genero:null,
       isActive: false,
+      saved: false,
       show: false,
       finalLandingPage:null,
-      ref: firebase.firestore().collection('questions').orderBy("date", "desc")
+      ref: firebase.firestore().collection('questions'),
+      users: firebase.firestore().collection('encuestados')
     };
   },
   filters: {
@@ -265,13 +267,14 @@ export default {
       this.userResponses = Array(this.quiz.questions.length).fill(null);
       this.genero = null;
       this.questionIndex = 0;
+      this.saved = false;
       
     },
     selectOption: function(index) {
       Vue.set(this.userResponses, this.questionIndex, index);
     },
     next: function() {
-      console.log(this.quiz.questions.length);
+      // console.log(this.quiz.questions.length);
       if (this.questionIndex < this.quiz.questions.length) this.questionIndex++;
       window.scrollTo(0,0);
     },
@@ -284,7 +287,25 @@ export default {
         resultados.push((undefined !== this.quiz.questions[i].responses[this.userResponses[i]].value)?this.quiz.questions[i].responses[this.userResponses[i]].value:'');
       }
       this.finalLandingPage = (resultados.includes( 1 ))?1:(resultados.includes( 2 ))? 2 : 0;
+      this.saveSurvey();
       return(this.finalLandingPage)
+    },
+    saveSurvey: function() {
+      if(false == this.saved){
+        this.saved = true;
+        let toSave = new Object;
+          toSave ={
+            submited: new Date(),
+            gender: this.genero,
+            responses: this.userResponses,
+          }
+        this.users.add(toSave).then(() => {
+          console.log('enviar a la ruta: '+ this.score);
+        })
+        .catch((error) => {
+          alert("Error adding document: ", error);
+        });
+      }
     }
   },
   watch: {
@@ -301,7 +322,7 @@ export default {
     }
   },
   created: function(){
-    this.ref.onSnapshot((querySnapshot)=>{
+    this.ref.orderBy("date", "asc").onSnapshot((querySnapshot)=>{
       this.quiz.questions = [];
       querySnapshot.forEach((doc)=>{
         this.quiz.questions.push(doc.data())

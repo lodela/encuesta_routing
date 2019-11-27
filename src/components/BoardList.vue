@@ -86,7 +86,6 @@
             </b-form-group>
         </b-card>
         <b-card bg-variant="light">
-            {{responses}}
             <div class="mb-3 float-sm-right addResponseInput" >
                 <b-button-group size="sm">
                     <b-button @click.stop="add()" variant="success"><font-awesome-icon icon="plus-circle"/></b-button>
@@ -142,7 +141,7 @@ export default {
       formTitle:'Editar una pregunta',
       isEdit:null,
       errors:[],
-      name: '',
+      editKey: null,
       questions:{
           mujer:null,
           hombre:null
@@ -161,13 +160,13 @@ export default {
         { value: 0, text: '0' }
       ],
       nameState: null,
-      ref: firebase.firestore().collection('questions').orderBy("date", "desc")
+      ref: firebase.firestore().collection('questions')
     }
   },
   methods:{
     add(index) {
         console.log(index);
-        this.responses.push({ r: '', value:null });
+        this.responses.push({ r: '', value:'' });
     },
     remove(index) {
         this.responses.splice(index, 1);
@@ -177,7 +176,10 @@ export default {
     },
     addEdit(data){
       if(data){
-        this.addEditBoard = data;
+        console.log(data);
+        this.editKey = data.key;
+        this.questions = data.questions;
+        this.responses = data.responses;
         this.isEdit = true;
         this.formTitle = 'Editar Pregunta';
       }else{
@@ -188,16 +190,19 @@ export default {
       this.show = true;
     },
     deleteboard (id) {
-      firebase.firestore().collection('boards').doc(id).delete().then(() => {
-        // router.push({
-
-        // })
+      this.ref.doc(id).delete().then(() => {
+        
       }).catch((error) => {
         alert("Error removing document: ", error);
       });
     },
     resetModal() {
       this.responses = [{r:'', value:''}];
+      this.editKey= null;
+      this.questions={
+          mujer:null,
+          hombre:null
+      };
     },
     handleOk(bvModalEvt) {
       // Prevent modal from closing
@@ -222,15 +227,13 @@ export default {
               },
               responses:this.responses
           }
-      console.log(toSave);
       if(true == !!this.isEdit){
-
-        // const updateRef = firebase.firestore().collection('boards').doc(this.addEditBoard.key);
-        //       updateRef.set(this.addEditBoard).then(()=> {
-        //         this.$refs.modal.hide();
-        //       }).catch((error) => {
-        //         alert("Error adding document: ", error);
-        //       });
+        const updateRef = this.ref.doc(this.editKey);
+              updateRef.set(toSave).then(()=> {
+                this.$refs.modal.hide();
+              }).catch((error) => {
+                alert("Error adding document: ", error);
+              });
       }else{
         this.ref.add(toSave).then(() => {
           this.$refs.modal.hide();
@@ -242,7 +245,7 @@ export default {
     }
   },
   created(){
-    this.ref.onSnapshot((querySnapshot)=>{
+    this.ref.orderBy("date", "asc").onSnapshot((querySnapshot)=>{
       this.boards = [];
       querySnapshot.forEach((doc)=>{
         this.boards.push({
@@ -262,7 +265,6 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .container{
-    border: solid 1px red;
     margin-top: 100px;
     margin-bottom: 100px;
     min-height: 100vh;
