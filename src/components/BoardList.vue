@@ -142,6 +142,7 @@ export default {
       isEdit:null,
       errors:[],
       editKey: null,
+      editDate:null,
       questions:{
           mujer:null,
           hombre:null
@@ -178,6 +179,7 @@ export default {
       if(data){
         console.log(data);
         this.editKey = data.key;
+        this.editDate= data.date;
         this.questions = data.questions;
         this.responses = data.responses;
         this.isEdit = true;
@@ -199,6 +201,7 @@ export default {
     resetModal() {
       this.responses = [{r:'', value:''}];
       this.editKey= null;
+      this.editDate = null;
       this.questions={
           mujer:null,
           hombre:null
@@ -220,7 +223,7 @@ export default {
       }
       let toSave = new Object;
           toSave={
-              date:new Date(),
+              date:(true == !!this.isEdit)?this.editDate:new Date(),
               q:{
                   mujer:this.questions.mujer,
                   hombre:this.questions.hombre
@@ -251,7 +254,8 @@ export default {
         this.boards.push({
           key: doc.id,
           questions: doc.data().q,
-          responses: doc.data().responses
+          responses: doc.data().responses,
+          date: doc.data().date
         });
       });
     })

@@ -1,32 +1,14 @@
 <template>
   <div id="app" class="flex-container">
-    <Navbar></Navbar>
     <router-view/>
-    <footer class="footer bg-dark">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-6">
-            <p class="copyright font-alt">© 2020&nbsp;<a href="index.html">Dirección General De La Mujer</a>, Apodaca, N.L.</p>
-          </div>
-          <div class="col-sm-6">
-            <div class="footer-social-links">
-              <a><i class="fab fa-facebook-f"></i></a>
-              <a><i class="fab fa-twitter"></i></a>
-              <a><i class="fab fa-dribbble"></i></a>
-              <a><i class="fab fa-skype"></i></a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
   </div>
 </template>
 
 <script>
-import Navbar from './components/Navbar';
+
 export default {
   components:{
-    Navbar
+    
   }
 
 }
